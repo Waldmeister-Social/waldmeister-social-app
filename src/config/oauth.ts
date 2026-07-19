@@ -77,4 +77,4 @@ export const OAUTH_PUBLIC_JWKS: {keys: Record<string, unknown>[]} = publicJwks
  */
 export const OAUTH_ASSERTION_URL: string =
   process.env.EXPO_PUBLIC_OAUTH_ASSERTION_URL ||
-  'https://oauth.mu.social/client-assertion'
+  'https://oauth.waldmeister.eu/client-assertion'

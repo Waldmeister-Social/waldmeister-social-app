@@ -13,11 +13,17 @@ import {BRAND} from '#/config/brand'
  * threshold flags are sent/stored - never the birthdate.
  */
 
-export type MuAgeFlags = {over13: boolean; over16: boolean; over18: boolean}
-export type MuAgeStatus = {declared: boolean} & Partial<MuAgeFlags>
+export type WaldmeisterAgeFlags = {
+  over13: boolean
+  over16: boolean
+  over18: boolean
+}
+export type WaldmeisterAgeStatus = {
+  declared: boolean
+} & Partial<WaldmeisterAgeFlags>
 
-const GET_STATUS = 'social.mu.age.getStatus'
-const SET_STATUS = 'social.mu.age.setStatus'
+const GET_STATUS = 'eu.waldmeister.age.getStatus'
+const SET_STATUS = 'eu.waldmeister.age.setStatus'
 
 /**
  * Rebuild a representative birthdate string from stored flags for the region
@@ -26,7 +32,7 @@ const SET_STATUS = 'social.mu.age.setStatus'
  * "declared but under 13" maps to a young sentinel so the global under-13 block
  * triggers.
  */
-export function birthdateFromFlags(flags: MuAgeFlags): string {
+export function birthdateFromFlags(flags: WaldmeisterAgeFlags): string {
   const age = flags.over18 ? 18 : flags.over16 ? 16 : flags.over13 ? 13 : 5
   const today = new Date()
   return new Date(
@@ -74,7 +80,9 @@ function timeoutSignal(ms: number): AbortSignal {
   return controller.signal
 }
 
-export async function getMuAgeStatus(agent: AtpAgent): Promise<MuAgeStatus> {
+export async function getWaldmeisterAgeStatus(
+  agent: AtpAgent,
+): Promise<WaldmeisterAgeStatus> {
   const authorization = await bearer(agent, GET_STATUS)
   const res = await fetch(
     `${BRAND.ageAssurance.serviceUrl}/xrpc/${GET_STATUS}`,
@@ -83,12 +91,12 @@ export async function getMuAgeStatus(agent: AtpAgent): Promise<MuAgeStatus> {
   if (!res.ok) {
     throw new Error(`getMuAgeStatus: ${res.status}`)
   }
-  return (await res.json()) as MuAgeStatus
+  return (await res.json()) as WaldmeisterAgeStatus
 }
 
-export async function setMuAgeStatus(
+export async function setWaldmeisterAgeStatus(
   agent: AtpAgent,
-  flags: MuAgeFlags,
+  flags: WaldmeisterAgeFlags,
 ): Promise<void> {
   const authorization = await bearer(agent, SET_STATUS)
   const res = await fetch(

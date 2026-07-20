@@ -4,7 +4,7 @@ import {logger} from '#/ageAssurance/logger'
 import {BRAND} from '#/config/brand'
 
 /**
- * Client for the mu age-assurance backend (`mu-age-service`).
+ * Client for the waldmeister age-assurance backend (`waldmeister-age-service`).
  *
  * The app sources the user's *declared* age from here instead of app.bsky
  * preferences, which OAuth sessions can't read/write. Auth is an atproto
@@ -89,7 +89,7 @@ export async function getWaldmeisterAgeStatus(
     {headers: {authorization}, signal: timeoutSignal(REQUEST_TIMEOUT)},
   )
   if (!res.ok) {
-    throw new Error(`getMuAgeStatus: ${res.status}`)
+    throw new Error(`getWaldmeisterAgeStatus: ${res.status}`)
   }
   return (await res.json()) as WaldmeisterAgeStatus
 }
@@ -110,9 +110,9 @@ export async function setWaldmeisterAgeStatus(
   )
   if (!res.ok) {
     const text = await res.text().catch(() => '')
-    logger.error('setMuAgeStatus failed', {
+    logger.error('setWaldmeisterAgeStatus failed', {
       safeMessage: `${res.status} ${text}`,
     })
-    throw new Error(`setMuAgeStatus: ${res.status}`)
+    throw new Error(`setWaldmeisterAgeStatus: ${res.status}`)
   }
 }

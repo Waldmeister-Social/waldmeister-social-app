@@ -12,16 +12,19 @@ import {Loader} from '#/components/Loader'
 import {Text} from '#/components/Typography'
 import {usePatchAgeAssuranceOtherRequiredData} from '#/ageAssurance'
 import {setBirthdateForDid} from '#/ageAssurance/data'
-import {birthdateFromFlags, setMuAgeStatus} from '#/ageAssurance/muAgeService'
+import {
+  birthdateFromFlags,
+  setWaldmeisterAgeStatus,
+} from '#/ageAssurance/waldmeisterAgeService'
 import {IS_WEB} from '#/env'
 
 /**
- * mu age confirmation dialog. Writes self-declared age threshold flags to the mu
+ * waldmeister age confirmation dialog. Writes self-declared age threshold flags to the waldmeister
  * age-assurance backend (works over OAuth + password sessions), then
  * optimistically updates the age-assurance cache so the gate lifts. The user
  * simply confirms they are 18 or older - no birthdate is collected or sent.
  */
-export function MuAgeConfirmDialog({
+export function WaldmeisterAgeConfirmDialog({
   control,
 }: {
   control: Dialog.DialogControlProps
@@ -54,7 +57,7 @@ function Inner({control}: {control: Dialog.DialogControlProps}) {
     setIsPending(true)
     try {
       const flags = {over13: true, over16: true, over18: true}
-      await setMuAgeStatus(agent, flags)
+      await setWaldmeisterAgeStatus(agent, flags)
       const birthdate = birthdateFromFlags(flags)
       if (currentAccount?.did) {
         setBirthdateForDid({did: currentAccount.did, birthdate})
@@ -62,7 +65,9 @@ function Inner({control}: {control: Dialog.DialogControlProps}) {
       patch({birthdate})
       control.close()
     } catch (e) {
-      logger.error('MuAgeConfirmDialog: save failed', {safeMessage: String(e)})
+      logger.error('WaldmeisterAgeConfirmDialog: save failed', {
+        safeMessage: String(e),
+      })
       setError(l`Something went wrong. Please try again.`)
       setIsPending(false)
     }

@@ -21,7 +21,6 @@ import {useAgent, useSession} from '#/state/session'
 import {DEVICE_SIGNALS_SUPPORTED} from '#/ageAssurance/const'
 import * as debug from '#/ageAssurance/debug'
 import {logger} from '#/ageAssurance/logger'
-import {birthdateFromFlags, getMuAgeStatus} from '#/ageAssurance/muAgeService'
 import {
   type AgeAssuranceDeviceSignals,
   type AgeAssuranceMetadata,
@@ -30,6 +29,10 @@ import {
   createRegionKey,
   getAgeAssuranceRegionConfigForGeolocation,
 } from '#/ageAssurance/util'
+import {
+  birthdateFromFlags,
+  getWaldmeisterAgeStatus,
+} from '#/ageAssurance/waldmeisterAgeService'
 import {IS_DEV} from '#/env'
 import {useGeolocation} from '#/geolocation'
 import {device} from '#/storage'
@@ -345,7 +348,7 @@ async function getOtherRequiredData({
   const did = getDidFromAgentSession(agent)
 
   /**
-   * mu fork: the declared age comes from our own backend (mu-age-service),
+   * waldmeister fork: the declared age comes from our own backend (waldmeister-age-service),
    * uniformly across OAuth and app-password sessions. It stores only boolean
    * threshold flags, so we rebuild a representative birthdate for the region
    * rule engine. `birthdate` undefined === the user has not declared yet, which
@@ -353,7 +356,7 @@ async function getOtherRequiredData({
    * + NoAccessScreen). We no longer read app.bsky preferences here.
    */
   const [status, actorDeclaration] = await Promise.all([
-    getMuAgeStatus(agent),
+    getWaldmeisterAgeStatus(agent),
     fetchActorDeclarationRecord({did, agent}),
   ])
   const data: OtherRequiredData = {
@@ -457,7 +460,7 @@ export function useOtherRequiredDataQuery() {
     {
       enabled: !!did,
       /**
-       * mu fork: the declared age comes from our own backend and changes ~never,
+       * waldmeister fork: the declared age comes from our own backend and changes ~never,
        * so treat it as fresh for 7 days (5s in dev for easy testing). Avoids
        * re-minting a service-auth token + hitting the backend on every window
        * focus; the persisted cache still serves it instantly on cold start, and

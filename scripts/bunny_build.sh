@@ -17,15 +17,15 @@ set -euo pipefail
 # moderation labelers are required; without it the app fail-closes and
 # subscribes ALL of them for every user.
 : "${EXPO_PUBLIC_ENABLE_GEOLOCATION:=true}"
-: "${EXPO_PUBLIC_GEOLOCATION_URL:=https://ip.mu.social}"
+: "${EXPO_PUBLIC_GEOLOCATION_URL:=https://ip.waldmeister.eu}"
 : "${EXPO_PUBLIC_ENABLE_LIVE_EVENTS:=false}"
 : "${EXPO_PUBLIC_ENABLE_APP_CONFIG:=false}"
-: "${EXPO_PUBLIC_PLAUSIBLE_DOMAIN:=mu.social}"
+: "${EXPO_PUBLIC_PLAUSIBLE_DOMAIN:=waldmeister.eu}"
 # Route analytics through the first-party Bunny proxy (see services/plausible/)
 # so ad/content blockers that blocklist plausible.io stop dropping events. The
 # tracker posts to ${EXPO_PUBLIC_PLAUSIBLE_API_HOST}/api/event, so this must
 # include the scheme (unlike the bare PLAUSIBLE_DOMAIN above).
-: "${EXPO_PUBLIC_PLAUSIBLE_API_HOST:=https://events.mu.social}"
+: "${EXPO_PUBLIC_PLAUSIBLE_API_HOST:=https://events.waldmeister.eu}"
 export EXPO_PUBLIC_ENABLE_GEOLOCATION
 export EXPO_PUBLIC_GEOLOCATION_URL
 export EXPO_PUBLIC_ENABLE_LIVE_EVENTS

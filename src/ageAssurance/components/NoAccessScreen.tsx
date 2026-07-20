@@ -11,7 +11,7 @@ import {DeleteAccountDialog} from '#/screens/Settings/components/DeleteAccountDi
 import {atoms as a, useBreakpoints, useTheme, web} from '#/alf'
 import {Admonition} from '#/components/Admonition'
 import {AgeAssuranceBadge} from '#/components/ageAssurance/AgeAssuranceBadge'
-import {MuAgeConfirmDialog} from '#/components/ageAssurance/MuAgeConfirmDialog'
+import {WaldmeisterAgeConfirmDialog} from '#/components/ageAssurance/MuAgeConfirmDialog'
 import {Button, ButtonText} from '#/components/Button'
 import {useDialogControl} from '#/components/Dialog'
 import {DeviceLocationRequestDialog} from '#/components/dialogs/DeviceLocationRequestDialog'
@@ -221,7 +221,7 @@ export function NoAccessScreen() {
         </ScrollView>
       </View>
 
-      <MuAgeConfirmDialog control={birthdateControl} />
+      <WaldmeisterAgeConfirmDialog control={birthdateControl} />
       <DeactivateAccountDialog control={deactivateAccountControl} />
       <DeleteAccountDialog
         control={deleteAccountControl}

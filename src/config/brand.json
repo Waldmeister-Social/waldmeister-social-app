@@ -88,6 +88,21 @@
         "primary_900": "#11450C",
         "primary_950": "#0C3308",
         "primary_975": "#072204"
+      },
+      "green": {
+        "primary_25": "#F1F8F2",
+        "primary_50": "#DBF0DE",
+        "primary_100": "#B3E6BB",
+        "primary_200": "#7AD88E",
+        "primary_300": "#3DCB63",
+        "primary_400": "#02BC60",
+        "primary_500": "#0D8A4B",
+        "primary_600": "#0B7440",
+        "primary_700": "#10642C",
+        "primary_800": "#105427",
+        "primary_900": "#114622",
+        "primary_950": "#10391D",
+        "primary_975": "#0E2C17"
       }
     },
     "defaultAccent": "woodruff"
@@ -112,7 +127,9 @@
     "helpDesk": "https://hello.waldmeister.eu/contact",
     "supportRequest": "https://hello.waldmeister.eu/contact",
     "download": "https://bsky.app/download",
-    "statusPage": "https://status.bsky.app/"
+    "statusPage": "https://status.bsky.app/",
+    "donate": "https://whydonate.com/fundraising/the-next-era-of-social-media",
+    "feedback": "https://userinput.app/s/did:plc:ooensn4mr5mhznzypvxelfa3/3mnwmwn7sn22u"
   },
   "services": {
     "pds": "https://bsky.social",

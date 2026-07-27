@@ -1,9 +1,9 @@
 import {type AppBskyGraphVerification, AtUri} from '@atproto/api'
 import {useQuery} from '@tanstack/react-query'
 
+import {SLINGSHOT_SERVICE} from '#/lib/constants'
 import {STALE} from '#/state/queries'
 import {createQueryKey} from '#/state/queries/util'
-import {useAgent} from '#/state/session'
 
 export type VerificationRecord = {
   /** The subject's handle frozen at the moment of verifying. */
@@ -21,6 +21,9 @@ const verificationRecordQueryKeyRoot = 'verification-record'
  * so this is how we recover `createdAt` and the frozen handle/displayName needed
  * to compute strict validity. Only enabled where we actually need the body (the
  * verifications dialog), so we don't pay for it on every badge.
+ *
+ * Waldmeister Fork: Since each PDS only holds the records it has issued,
+ * we use slingshot to fetch the record from the issuer's PDS instead of the local PDS.
  */
 export function useVerificationRecordQuery({
   uri,
@@ -29,23 +32,31 @@ export function useVerificationRecordQuery({
   uri: string
   enabled: boolean
 }) {
-  const agent = useAgent()
   return useQuery<VerificationRecord>({
     queryKey: createQueryKey(verificationRecordQueryKeyRoot, {uri}),
     enabled: enabled && !!uri,
     staleTime: STALE.MINUTES.FIVE,
     queryFn: async () => {
       const atUri = new AtUri(uri)
-      const {data} = await agent.api.com.atproto.repo.getRecord({
-        repo: atUri.host,
-        collection: atUri.collection,
-        rkey: atUri.rkey,
+
+      // Fetch the record from the issuer's PDS using slingshot (no auth required)
+      const url = new URL('/xrpc/com.atproto.repo.getRecord', SLINGSHOT_SERVICE)
+      url.searchParams.set('repo', atUri.host)
+      url.searchParams.set('collection', atUri.collection)
+      url.searchParams.set('rkey', atUri.rkey)
+
+      const res = await fetch(url.toString(), {
+        headers: {accept: 'application/json'},
       })
-      const value = data.value as AppBskyGraphVerification.Record
+      if (!res.ok) {
+        throw new Error(`Slingshot getRecord failed: ${res.status}`)
+      }
+      const json = (await res.json()) as AppBskyGraphVerification.Record
+
       return {
-        handle: value.handle,
-        displayName: value.displayName ?? '',
-        createdAt: value.createdAt,
+        handle: json.handle,
+        displayName: json.displayName ?? '',
+        createdAt: json.createdAt,
       }
     },
   })

@@ -51,12 +51,15 @@ export function useVerificationRecordQuery({
       if (!res.ok) {
         throw new Error(`Slingshot getRecord failed: ${res.status}`)
       }
-      const json = (await res.json()) as AppBskyGraphVerification.Record
+      const json = (await res.json()) as {
+        value: AppBskyGraphVerification.Record
+      }
+      const value = json.value
 
       return {
-        handle: json.handle,
-        displayName: json.displayName ?? '',
-        createdAt: json.createdAt,
+        handle: value.handle,
+        displayName: value.displayName ?? '',
+        createdAt: value.createdAt,
       }
     },
   })

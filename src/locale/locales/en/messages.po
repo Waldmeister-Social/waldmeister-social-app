@@ -3338,14 +3338,14 @@ msgstr ""
 msgid "Confirm"
 msgstr ""
 
-#: src/components/ageAssurance/MuAgeConfirmDialog.tsx:87
+#: src/components/ageAssurance/MuAgeConfirmDialog.tsx:92
 msgid "Confirm that you are 18 or older"
 msgstr "Confirm that you are 18 or older"
 
 #: src/ageAssurance/components/NoAccessScreen.tsx:141
 #: src/ageAssurance/components/NoAccessScreen.tsx:144
-#: src/components/ageAssurance/MuAgeConfirmDialog.tsx:34
-#: src/components/ageAssurance/MuAgeConfirmDialog.tsx:74
+#: src/components/ageAssurance/MuAgeConfirmDialog.tsx:37
+#: src/components/ageAssurance/MuAgeConfirmDialog.tsx:79
 msgid "Confirm your age"
 msgstr "Confirm your age"
 
@@ -6706,7 +6706,7 @@ msgstr ""
 msgid "Husky"
 msgstr "Husky"
 
-#: src/components/ageAssurance/MuAgeConfirmDialog.tsx:94
+#: src/components/ageAssurance/MuAgeConfirmDialog.tsx:99
 msgid "I am 18 or older"
 msgstr "I am 18 or older"
 
@@ -7760,6 +7760,8 @@ msgstr ""
 
 #: src/components/dialogs/BirthDateSettings.tsx:104
 #: src/components/dialogs/BirthDateSettings.tsx:111
+#: src/components/dialogs/EmailDialog/screens/OAuthPasswordRequired.tsx:53
+#: src/components/dialogs/EmailDialog/screens/OAuthPasswordRequired.tsx:62
 msgid "Log out"
 msgstr "Log out"
 
@@ -7781,6 +7783,7 @@ msgid "Logo by <0>@sawaratsuki.bsky.social</0>"
 msgstr ""
 
 #: src/components/dialogs/BirthDateSettings.tsx:105
+#: src/components/dialogs/EmailDialog/screens/OAuthPasswordRequired.tsx:54
 msgid "Logs out so you can sign in with your password"
 msgstr "Logs out so you can sign in with your password"
 
@@ -7810,7 +7813,7 @@ msgstr ""
 msgid "Love GIFs"
 msgstr "Love GIFs"
 
-#: src/components/dialogs/EmailDialog/index.tsx:39
+#: src/components/dialogs/EmailDialog/index.tsx:41
 msgid "Make adjustments to email settings for your account"
 msgstr ""
 
@@ -12298,6 +12301,14 @@ msgstr "Sign in with password"
 msgid "Sign in with your handle via OAuth"
 msgstr "Sign in with your handle via OAuth"
 
+#: src/components/dialogs/EmailDialog/screens/OAuthPasswordRequired.tsx:25
+msgid "Sign in with your password to change your email"
+msgstr "Sign in with your password to change your email"
+
+#: src/components/dialogs/EmailDialog/screens/OAuthPasswordRequired.tsx:27
+msgid "Sign in with your password to manage email 2FA"
+msgstr "Sign in with your password to manage email 2FA"
+
 #: src/screens/Settings/Settings.tsx:296
 #: src/screens/Settings/Settings.tsx:298
 #: src/screens/Settings/Settings.tsx:330
@@ -12497,7 +12508,7 @@ msgstr ""
 msgid "Something went wrong. Please try again in a moment."
 msgstr ""
 
-#: src/components/ageAssurance/MuAgeConfirmDialog.tsx:66
+#: src/components/ageAssurance/MuAgeConfirmDialog.tsx:71
 #: src/components/moderation/ReportDialog/index.tsx:308
 msgid "Something went wrong. Please try again."
 msgstr ""
@@ -13543,7 +13554,7 @@ msgstr "This invite link has been disabled."
 msgid "This invite link is invalid"
 msgstr "This invite link is invalid"
 
-#: src/components/ageAssurance/MuAgeConfirmDialog.tsx:77
+#: src/components/ageAssurance/MuAgeConfirmDialog.tsx:82
 msgid "This is a one-time thing. It's private and not shared with other users."
 msgstr "This is a one-time thing. It's private and not shared with other users."
 
@@ -14759,8 +14770,8 @@ msgstr "View {0}’s profile"
 msgid "View {displayName}’s profile"
 msgstr "View {displayName}’s profile"
 
-#: src/features/newsrooms/components/NewsroomMasthead.tsx:60
-#: src/features/newsrooms/components/NewsroomMasthead.tsx:76
+#: src/features/newsrooms/components/NewsroomMasthead.tsx:61
+#: src/features/newsrooms/components/NewsroomMasthead.tsx:77
 msgid "View {name}’s profile"
 msgstr "View {name}’s profile"
 
@@ -15889,6 +15900,14 @@ msgstr "You’re in control"
 #: src/screens/SignupQueued.tsx:130
 msgid "You're in line"
 msgstr ""
+
+#: src/components/dialogs/EmailDialog/screens/OAuthPasswordRequired.tsx:32
+msgid "You're signed in via your hosting provider (OAuth). Changing your email address isn't supported for OAuth sign-ins. Log out, choose “Sign in with password” on the sign-in screen, and use your main account password."
+msgstr "You're signed in via your hosting provider (OAuth). Changing your email address isn't supported for OAuth sign-ins. Log out, choose “Sign in with password” on the sign-in screen, and use your main account password."
+
+#: src/components/dialogs/EmailDialog/screens/OAuthPasswordRequired.tsx:39
+msgid "You're signed in via your hosting provider (OAuth). Managing email 2FA isn't supported for OAuth sign-ins. Log out, choose “Sign in with password” on the sign-in screen, and use your main account password."
+msgstr "You're signed in via your hosting provider (OAuth). Managing email 2FA isn't supported for OAuth sign-ins. Log out, choose “Sign in with password” on the sign-in screen, and use your main account password."
 
 #: src/components/dialogs/BirthDateSettings.tsx:94
 msgid "You're signed in via your hosting provider (OAuth). Setting your birthdate isn't supported for OAuth sign-ins. To set it, log out and sign in again with your account password (use \"Sign in with password\" on the sign-in screen), set your birthdate, then continue."

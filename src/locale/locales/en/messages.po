@@ -8143,8 +8143,8 @@ msgstr "mu isn't available in your region, which legally requires verified age a
 #: src/features/newsFeed/components/NewsFeedRightRail.tsx:71
 #: src/features/newsrooms/NewsroomScreen.tsx:109
 #: src/Navigation.tsx:189
-msgid "Mu Newsrooms"
-msgstr "Mu Newsrooms"
+msgid "Waldmeister Newsrooms"
+msgstr "Waldmeister Newsrooms"
 
 #: src/screens/Takendown.tsx:212
 msgid "mu Terms of Service"

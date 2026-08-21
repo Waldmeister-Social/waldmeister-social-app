@@ -107,7 +107,7 @@ export function NewsroomScreen({route, navigation}: Props) {
         <Layout.Header.BackButton />
         <Layout.Header.Content>
           <Layout.Header.TitleText>
-            <Trans>Mu Newsrooms</Trans>
+            <Trans>Waldmeister Newsrooms</Trans>
           </Layout.Header.TitleText>
         </Layout.Header.Content>
         {/* Mirrors the news feed header's "Newsrooms" link, so the two news

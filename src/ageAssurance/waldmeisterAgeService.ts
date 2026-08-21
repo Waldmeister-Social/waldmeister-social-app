@@ -1,7 +1,9 @@
-import {type AtpAgent} from '@atproto/api'
+import {type Client} from '@atproto/lex'
+import {type NsidString} from '@atproto/syntax'
 
 import {logger} from '#/ageAssurance/logger'
 import {BRAND} from '#/config/brand'
+import {com} from '#/lexicons'
 
 /**
  * Client for the waldmeister age-assurance backend (`waldmeister-age-service`).
@@ -52,8 +54,8 @@ export function birthdateFromFlags(flags: WaldmeisterAgeFlags): string {
  * maximum age (300s)". A PDS-clock-relative short token avoids both, since
  * `bearer` is called immediately before each request.
  */
-async function bearer(agent: AtpAgent, lxm: string): Promise<string> {
-  const {data} = await agent.com.atproto.server.getServiceAuth({
+async function bearer(client: Client, lxm: NsidString): Promise<string> {
+  const data = await client.call(com.atproto.server.getServiceAuth, {
     aud: BRAND.ageAssurance.serviceDid,
     lxm,
   })
@@ -81,9 +83,9 @@ function timeoutSignal(ms: number): AbortSignal {
 }
 
 export async function getWaldmeisterAgeStatus(
-  agent: AtpAgent,
+  client: Client,
 ): Promise<WaldmeisterAgeStatus> {
-  const authorization = await bearer(agent, GET_STATUS)
+  const authorization = await bearer(client, GET_STATUS)
   const res = await fetch(
     `${BRAND.ageAssurance.serviceUrl}/xrpc/${GET_STATUS}`,
     {headers: {authorization}, signal: timeoutSignal(REQUEST_TIMEOUT)},
@@ -95,10 +97,10 @@ export async function getWaldmeisterAgeStatus(
 }
 
 export async function setWaldmeisterAgeStatus(
-  agent: AtpAgent,
+  client: Client,
   flags: WaldmeisterAgeFlags,
 ): Promise<void> {
-  const authorization = await bearer(agent, SET_STATUS)
+  const authorization = await bearer(client, SET_STATUS)
   const res = await fetch(
     `${BRAND.ageAssurance.serviceUrl}/xrpc/${SET_STATUS}`,
     {

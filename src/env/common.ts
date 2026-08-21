@@ -1,4 +1,4 @@
-import {type Did} from '@atproto/api'
+import {type DidString} from '@atproto/syntax'
 
 import packageJson from '#/../package.json'
 import {BRAND} from '#/config/brand'
@@ -15,11 +15,7 @@ export const RELEASE_VERSION: string =
  * The env the app is running in e.g. development, testflight, production, e2e
  */
 export const ENV: string = process.env.EXPO_PUBLIC_ENV as
-  | 'production'
-  | 'testflight'
-  | 'development'
-  | 'e2e'
-  | (string & {})
+  'production' | 'testflight' | 'development' | 'e2e' | (string & {})
 
 /**
  * Indicates whether the app is running in TestFlight
@@ -63,10 +59,7 @@ export const BUNDLE_DATE: number =
  * The log level for the app.
  */
 export const LOG_LEVEL = (process.env.EXPO_PUBLIC_LOG_LEVEL || 'info') as
-  | 'debug'
-  | 'info'
-  | 'warn'
-  | 'error'
+  'debug' | 'info' | 'warn' | 'error'
 
 /**
  * Enable debug logs for specific logger instances
@@ -79,13 +72,35 @@ export const LOG_DEBUG: string = process.env.EXPO_PUBLIC_LOG_DEBUG || ''
  * switching the appview is a single edit there; override per-deploy with
  * EXPO_PUBLIC_BLUESKY_PROXY_DID if it must differ from the brand default.
  */
-export const BLUESKY_PROXY_DID: Did =
+export const BLUESKY_PROXY_DID: DidString =
   process.env.EXPO_PUBLIC_BLUESKY_PROXY_DID || BRAND.services.appViewDid
+
+/**
+ * Percentage (0-100) of eligible read-only Bluesky AppView calls also sent to
+ * the candidate AppView. OAuth/DPoP calls are excluded because their proofs
+ * cannot be safely replayed. Invalid values disable shadowing; out-of-range
+ * values are clamped so rollout configuration cannot amplify traffic above
+ * 100%.
+ */
+const requestedAppViewShadowPercentage = Number(
+  process.env.EXPO_PUBLIC_APPVIEW_SHADOW_PERCENTAGE,
+)
+export const APPVIEW_SHADOW_PERCENTAGE: number = Number.isFinite(
+  requestedAppViewShadowPercentage,
+)
+  ? Math.min(100, Math.max(0, requestedAppViewShadowPercentage))
+  : 0
+
+/** Candidate AppView used for sampled shadow reads. */
+export const APPVIEW_SHADOW_URL: string =
+  process.env.EXPO_PUBLIC_APPVIEW_SHADOW_URL || 'https://api.eurosky.network'
+export const APPVIEW_SHADOW_DID: string =
+  process.env.EXPO_PUBLIC_APPVIEW_SHADOW_DID || 'did:web:api.eurosky.network'
 
 /**
  * The DID of the chat service to proxy to
  */
-export const CHAT_PROXY_DID: Did =
+export const CHAT_PROXY_DID: DidString =
   process.env.EXPO_PUBLIC_CHAT_PROXY_DID || 'did:web:api.bsky.chat'
 
 /**

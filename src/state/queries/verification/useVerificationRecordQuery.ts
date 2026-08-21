@@ -1,4 +1,4 @@
-import {type AppBskyGraphVerification, AtUri} from '@atproto/api'
+import {AtUri} from '@atproto/syntax'
 import {useQuery} from '@tanstack/react-query'
 
 import {SLINGSHOT_SERVICE} from '#/lib/constants'
@@ -10,6 +10,13 @@ export type VerificationRecord = {
   handle: string
   /** The subject's display name frozen at the moment of verifying. */
   displayName: string
+  createdAt: string
+}
+
+// Local interface definition to satisfy strict ESLint rules
+interface RawVerificationRecord {
+  handle: string
+  displayName?: string
   createdAt: string
 }
 
@@ -52,9 +59,11 @@ export function useVerificationRecordQuery({
         throw new Error(`Slingshot getRecord failed: ${res.status}`)
       }
       const json = (await res.json()) as {
-        value: AppBskyGraphVerification.Record
+        value: unknown
       }
-      const value = json.value
+
+      // Explicit assertion to local shape bypasses the ATProto SDK type generator issue
+      const value = json.value as RawVerificationRecord
 
       return {
         handle: value.handle,

@@ -18,7 +18,7 @@ There is deliberately no per-user newsroom state: with every registered
 newsroom equally visible everywhere, a newsroom-level follow or subscription
 would have no observable effect. If per-user state is ever added, it should
 have exactly one job - e.g. pinning the publisher into the reader's `/news`
-feed - live on the shared `social.mu.newsFeedPrefs` record rather than a new
+feed - live on the shared `eu.waldmeister.newsFeedPrefs` record rather than a new
 collection, and gate record creation on explicit consent like the news feed
 setup does.
 

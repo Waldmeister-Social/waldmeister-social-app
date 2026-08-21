@@ -9,7 +9,7 @@ accounts matching those facets.
 Two datasets, deliberately stored differently:
 
 - **User selections (Dataset 1)** - per-user, synced. Stored as a published
-  atproto record in the user's PDS: collection `social.mu.newsFeedPrefs`,
+  atproto record in the user's PDS: collection `eu.waldmeister.newsFeedPrefs`,
   rkey `self`. See `state/prefs.ts`.
 - **Source registry (Dataset 2)** - shared, operator-curated config mapping
   accounts to topic / region / language tags. Local list in `sources.ts`. This

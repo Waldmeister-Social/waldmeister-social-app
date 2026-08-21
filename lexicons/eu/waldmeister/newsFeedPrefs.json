@@ -1,6 +1,6 @@
 {
   "lexicon": 1,
-  "id": "social.mu.newsFeedPrefs",
+  "id": "eu.waldmeister.newsFeedPrefs",
   "defs": {
     "main": {
       "type": "record",

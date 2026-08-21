@@ -12,7 +12,7 @@ import {com} from '#/lexicons'
  * Collection NSID for the per-user news feed preferences record, stored as a
  * singleton at rkey `self` (mirroring `app.bsky.actor.profile`).
  */
-export const NEWS_FEED_PREFS_NSID = 'social.mu.newsFeedPrefs'
+export const NEWS_FEED_PREFS_NSID = 'eu.waldmeister.newsFeedPrefs'
 const NEWS_FEED_PREFS_RKEY = 'self'
 
 /**

@@ -149,9 +149,9 @@
   "services": {
     "pds": "https://bsky.social",
     "pdsDid": "did:web:bsky.social",
-    "publicApi": "https://public.api.bsky.app",
-    "appView": "https://api.bsky.app",
-    "appViewDid": "did:web:api.bsky.app",
+    "publicApi": "https://api.eurosky.network",
+    "appView": "https://api.eurosky.network",
+    "appViewDid": "did:web:api.eurosky.network",
     "chat": "https://api.bsky.chat",
     "embed": "https://embed.bsky.app",
     "gif": "https://gifs.bsky.app",
